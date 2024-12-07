@@ -1,0 +1,16 @@
+Section,IP Address/Endpoint,Count
+Requests per IP,192.168.1.1,5
+Requests per IP,203.0.113.5,5
+Requests per IP,198.51.100.23,4
+Requests per IP,10.0.0.2,3
+Requests per IP,192.168.1.100,5
+Most Accessed Endpoint,/login,13
+Most Accessed Endpoint,/home,5
+Most Accessed Endpoint,/about,4
+Most Accessed Endpoint,/contact,2
+Most Accessed Endpoint,/dashboard,2
+Most Accessed Endpoint,/profile,2
+Most Accessed Endpoint,/feedback,2
+Most Accessed Endpoint,/register,2
+Suspicious Activity,192.168.1.100,5
+Suspicious Activity,203.0.113.5,4
