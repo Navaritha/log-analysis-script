@@ -1,4 +1,4 @@
-# Log File Analysis Script
+VRV Security’s Python Intern Assignment
 
 ## What is this Project About?
 
@@ -23,12 +23,13 @@ After processing the log file, the results are shown in your terminal and saved 
    ```bash
    git clone https://github.com/Navaritha/log-file-analysis.git
    cd log-file-analysis
+   
 2. Install the Required Libraries: Make sure you have the required libraries by installing them:
-
 pip install -r requirements.txt
-3.Add Your Log File: Place your log file (e.g., sample.log.txt) in the project folder, or you can update the script to use a different log file location.
-4.Run the Script: Run the Python script to analyze your log file:
 
+3.Add Your Log File: Place your log file (e.g., sample.log.txt) in the project folder, or you can update the script to use a different log file location.
+
+4.Run the Script: Run the Python script to analyze your log file:
 python log_analysis.py
 The script will display the results in the terminal and save them in a file called log_analysis_results.csv.
 
