@@ -1,55 +1,66 @@
-import re
+import csv
 from collections import defaultdict
 
-# Initialize dictionaries to store counts
+# Initialize counters
 ip_request_count = defaultdict(int)
 endpoint_access_count = defaultdict(int)
-failed_login_attempts = defaultdict(int)
+suspicious_activity = defaultdict(int)
 
-# Regular expression pattern to match log entries
-log_pattern = r'(?P<ip>\d+\.\d+\.\d+\.\d+) - - \[\S+ \S+\] "(?P<method>\S+) (?P<endpoint>\S+) \S+" (?P<status_code>\d+)'
+# Open and read the log file
+with open('sample.log.txt', 'r') as log_file:
+    for line in log_file:
+        # Split log line by spaces to extract information
+        parts = line.split()
+        
+        ip_address = parts[0]  # IP Address
+        endpoint = parts[6]  # Endpoint (e.g., /home, /login)
+        status_code = parts[8]  # HTTP status code
+        response_time = parts[9]  # Response size (not needed here but could be useful)
 
-# Function to parse the log file and extract relevant data
-def parse_log_file(log_file):
-    with open(log_file, 'r') as file:
-        for line in file:
-            match = re.match(log_pattern, line)
-            if match:
-                ip = match.group('ip')
-                method = match.group('method')
-                endpoint = match.group('endpoint')
-                status_code = int(match.group('status_code'))
-                
-                # Count total requests for the IP address
-                ip_request_count[ip] += 1
-                
-                # Count access to each endpoint
-                endpoint_access_count[endpoint] += 1
-                
-                # Detect failed login attempts (status 401 on /login)
-                if method == 'POST' and endpoint == '/login' and status_code == 401:
-                    failed_login_attempts[ip] += 1
+        # Count requests per IP
+        ip_request_count[ip_address] += 1
+        
+        # Count accesses to endpoints
+        endpoint_access_count[endpoint] += 1
+        
+        # Detect suspicious activity (failed login attempts with status code 401)
+        if status_code == '401':
+            suspicious_activity[ip_address] += 1
 
-# Function to display the analysis results
-def display_analysis_results():
-    print("IP Address           Request Count")
+# Display results in terminal
+print("Requests per IP:")
+print(f"{'IP Address':<20}{'Request Count':<15}")
+for ip, count in ip_request_count.items():
+    print(f"{ip:<20}{count:<15}")
+
+print("\nMost Accessed Endpoint:")
+print(f"{'Endpoint':<20}{'Access Count':<15}")
+for endpoint, count in endpoint_access_count.items():
+    print(f"{endpoint:<20}{count:<15}")
+
+print("\nSuspicious Activity Detected:")
+print(f"{'IP Address':<20}{'Failed Login Attempts':<25}")
+for ip, failed_count in suspicious_activity.items():
+    print(f"{ip:<20}{failed_count:<25}")
+
+# Save results to CSV
+with open('log_analysis_results.csv', 'w', newline='') as csvfile:
+    writer = csv.writer(csvfile)
+    
+    # Write headers
+    writer.writerow(['Section', 'IP Address/Endpoint', 'Count'])
+    
+    # Write Requests per IP
     for ip, count in ip_request_count.items():
-        print(f"{ip}        {count}")
+        writer.writerow(['Requests per IP', ip, count])
     
-    print("\nEndpoint           Access Count")
+    # Write Most Accessed Endpoint
     for endpoint, count in endpoint_access_count.items():
-        print(f"{endpoint}        {count}")
+        writer.writerow(['Most Accessed Endpoint', endpoint, count])
     
-    print("\nSuspicious Activity Detected: IP Address           Failed Login Attempts")
-    for ip, failed_count in failed_login_attempts.items():
-        if failed_count >= 5:  # You can adjust this threshold as needed
-            print(f"{ip}        {failed_count}")
+    # Write Suspicious Activity
+    for ip, failed_count in suspicious_activity.items():
+        writer.writerow(['Suspicious Activity', ip, failed_count])
 
-# Main function to run the log analysis
-def main():
-    log_file = 'sample.log.txt'  
-    parse_log_file(log_file)
-    display_analysis_results()
-
-if __name__ == '__main__':
-    main()
+print("\nResults have been saved to 'log_analysis_results.csv'.")
+            
