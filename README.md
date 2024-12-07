@@ -1,4 +1,4 @@
-### VRV Security’s Python Intern Assignment
+# VRV Security’s Python Intern Assignment
 
 ## What is this Project About?
 
@@ -25,30 +25,30 @@ After processing the log file, the results are shown in your terminal and saved 
    cd log-file-analysis
    
 2. Install the Required Libraries: Make sure you have the required libraries by installing them:
-pip install -r requirements.txt
+   pip install -r requirements.txt
 
-3.Add Your Log File: Place your log file (e.g., sample.log.txt) in the project folder, or you can update the script to use a different log file location.
+3. Add Your Log File: Place your log file (e.g., sample.log.txt) in the project folder, or you can update the script to use a different log file location.
 
-4.Run the Script: Run the Python script to analyze your log file:
-python log_analysis.py
-The script will display the results in the terminal and save them in a file called log_analysis_results.csv.
+4. Run the Script: Run the Python script to analyze your log file:
+   python log_analysis.py
+   The script will display the results in the terminal and save them in a file called log_analysis_results.csv.
 
-Output
-Terminal Output:
-You will see something like this in the terminal:
+### Output
+   Terminal Output:
+   You will see something like this in the terminal:
 
-Requests per IP:
-192.168.1.1 - 5 requests
-203.0.113.5 - 3 requests
-Most Accessed Endpoint: /login - 15 times
-Suspicious Activity Detected: 
-IP Address            Failed Login Attempts
-192.168.1.100         10
-203.0.113.5           8
+   Requests per IP:
+   192.168.1.1 - 5 requests
+   203.0.113.5 - 3 requests
+   Most Accessed Endpoint: /login - 15 times
+   Suspicious Activity Detected: 
+   IP Address            Failed Login Attempts
+   192.168.1.100         10
+   203.0.113.5           8
+   
+   ### CSV File:
+   The results will also be saved in a CSV file, log_analysis_results.csv, with the following structure:
 
-CSV File:
-The results will also be saved in a CSV file, log_analysis_results.csv, with the following structure:
-
-Requests per IP: Shows the IP address and how many requests it made.
-Most Accessed Endpoint: Shows which endpoint (page) was accessed the most.
-Suspicious Activity: Lists the IP addresses with multiple failed login attempts.
+   Requests per IP: Shows the IP address and how many requests it made.
+   Most Accessed Endpoint: Shows which endpoint (page) was accessed the most.
+   Suspicious Activity: Lists the IP addresses with multiple failed login attempts.
